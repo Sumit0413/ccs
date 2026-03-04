@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-neon: #39ff14;
+  --color-neon-dim: #28cc0f;
+  --color-bg: #111111;
+  --color-surface: #1a1a1a;
+  --color-border: #242424;
+  --color-muted: #606060;
+  --color-panel-bento1: #0d1f12;
+  --color-panel-bento2: #12121e;
+  --color-panel-parallax: #0a1a08;
+  --color-panel-transition: #101e10;
+  --color-panel-cta: #0d0d1f;
+  --color-card-green: #0e2217;
+  --color-card-purple: #140e28;
+  --color-card-teal: #081820;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+
+body {
+  background: #111111;
+  color: #f0f0f0;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ─── Scroll-stacking system ─── */
+.scroll-wrapper { position: relative; }
+
+.panel {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  /* Rounded bottom so next section slides over with card-edge */
+  border-radius: 0 0 28px 28px;
+}
+
+/* ─── Hero grid pattern ─── */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(57, 255, 20, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 25%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ─── Neon glow ─── */
+.neon-glow {
+  text-shadow: 0 0 24px rgba(57, 255, 20, 0.6), 0 0 80px rgba(57, 255, 20, 0.2);
+}
+
+/* ─── Bento 3-column flex layout ─── */
+.bento-flex {
+  display: flex;
+  gap: 12px;
+  height: calc(100vh - 10rem);
+}
+
+.bento-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.bento-col-center {
+  flex: 1;
+}
+
+/* ─── Code rain bg ─── */
+.code-rain-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.06;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: #39ff14;
+  white-space: pre;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ─── ISO card ─── */
+.iso-perspective { perspective: 1200px; }
+.iso-card { transform-style: preserve-3d; will-change: transform; }
+
+/* ─── Stack overlay card ─── */
+.stack-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  will-change: clip-path, transform;
+}
+
+/* ─── Keyframes ─── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(57,255,20,0.18), 0 0 40px rgba(57,255,20,0.05); }
+  50% { box-shadow: 0 0 45px rgba(57,255,20,0.55), 0 0 90px rgba(57,255,20,0.15); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.cursor-blink { color: #39ff14; animation: blink 1s steps(1) infinite; }
+.floating { animation: float 5s ease-in-out infinite; }
+.glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+.marquee-track { animation: marquee 22s linear infinite; }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #28cc0f; border-radius: 2px; }
