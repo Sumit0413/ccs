@@ -28,7 +28,6 @@ export default function EventsPreview() {
       <section className="flex flex-col py-32" style={{ background: '#0e1510', position: 'relative' }} ref={wrapperRef}>
         <div className="w-full max-w-[1280px] mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16">
           
-          {/* Upcoming Events */}
           <div>
             <h2 className="font-display font-black text-4xl uppercase text-white mb-8 border-l-4 border-[#39ff14] pl-4">
               Upcoming Events
@@ -46,7 +45,6 @@ export default function EventsPreview() {
             </div>
           </div>
 
-          {/* Completed Events */}
           <div>
             <h2 className="font-display font-black text-4xl uppercase text-white mb-8 border-l-4 border-[#a855f7] pl-4">
               Completed Events

@@ -22,12 +22,10 @@ export default function Agenda() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states for cards (hidden/behind center)
       gsap.set(centerCardRef.current, { scale: 0.8, opacity: 0 });
       gsap.set(leftColRef.current, { x: 300, opacity: 0, scale: 0.8 });
       gsap.set(rightColRef.current, { x: -300, opacity: 0, scale: 0.8 });
 
-      // FIX: Start text much further apart vertically to account for absolute positioning
       gsap.set(textLinesRef.current[0], { xPercent: -50, yPercent: -50, y: -140, scale: 1 });
       gsap.set(textLinesRef.current[1], { xPercent: -50, yPercent: -50, y: 0, scale: 1 });
 
@@ -35,23 +33,22 @@ export default function Agenda() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=250%', // 250% of viewport height to scrub through
+          end: '+=250%',
           pin: true,
           scrub: 1.5,
           snap: {
-            snapTo: [0, 1], // Snap to start or end when user stops
+            snapTo: [0, 1],
             duration: { min: 0.5, max: 1.0 },
             ease: 'power2.inOut',
           },
         },
       });
 
-      // 1. Shrink and move huge text into a horizontal top header
-      const topOfScreenY = -(window.innerHeight * 0.40); // Move roughly 40vh up
+      const topOfScreenY = -(window.innerHeight * 0.40);
       
       tl.to(textLinesRef.current[0], {
         y: topOfScreenY,
-        x: -90, // User-adjusted precise visual target
+        x: -90,
         scale: 0.35,
         opacity: 0.8,
         duration: 1,
@@ -60,14 +57,13 @@ export default function Agenda() {
       
       tl.to(textLinesRef.current[1], {
         y: topOfScreenY,
-        x: 70, // User-adjusted precise visual target
+        x: 70,
         scale: 0.35,
         opacity: 0.8,
         duration: 1,
         ease: 'power3.inOut',
       }, 0);
 
-      // 2. Center card fades and scales in
       tl.to(centerCardRef.current, {
         scale: 1,
         opacity: 1,
@@ -75,7 +71,6 @@ export default function Agenda() {
         ease: 'back.out(1.5)',
       }, '>-0.4');
 
-      // 3. Side cards erupt outwards from the center card
       tl.to(leftColRef.current, {
         x: 0,
         opacity: 1,
@@ -102,7 +97,6 @@ export default function Agenda() {
       <section ref={containerRef} className="relative w-full h-screen overflow-hidden" style={{ background: '#0d1f12' }}>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           
-          {/* HUGE TEXT GROUP */}
           <div ref={textGroupRef} className="absolute left-1/2 top-1/2 pointer-events-none z-20">
             <h2 
               ref={(el) => (textLinesRef.current[0] = el)} 
@@ -120,10 +114,8 @@ export default function Agenda() {
             </h2>
           </div>
 
-          {/* BENTO CARDS */}
           <div ref={contentRef} className="w-full max-w-[1280px] px-8 flex gap-6 h-[500px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-16 z-10">
             
-            {/* LEFT column */}
             <div ref={leftColRef} className="flex-1 flex flex-col gap-6">
               <div className="flex-1 rounded-2xl p-8 flex flex-col relative overflow-hidden group"
                 style={{ background: '#100a22', border: '1px solid #1e1040' }}>
@@ -140,7 +132,6 @@ export default function Agenda() {
               </div>
             </div>
 
-            {/* CENTER column */}
             <div ref={centerCardRef} className="flex-1 flex flex-col gap-6 relative z-20">
               <div className="h-full rounded-2xl p-10 flex flex-col text-center items-center justify-center gap-6 shadow-2xl"
                 style={{ background: '#111111', border: '1px solid rgba(57,255,20,0.3)', boxShadow: '0 0 60px rgba(57,255,20,0.1)' }}>
@@ -153,7 +144,6 @@ export default function Agenda() {
               </div>
             </div>
 
-            {/* RIGHT column */}
             <div ref={rightColRef} className="flex-1 flex flex-col gap-6">
               <div className="flex-1 rounded-2xl p-8 flex flex-col group"
                 style={{ background: '#081820', border: '1px solid #0d2530' }}>

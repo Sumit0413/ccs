@@ -74,7 +74,6 @@ export default function MembersTiered() {
           const cardCenterX = cardRect.left + cardRect.width / 2;
           const cardCenterY = cardRect.top + cardRect.height / 2;
 
-          // Pure visual translation delta based on layout
           const deltaX = stackCenterX - cardCenterX;
           const deltaY = stackCenterY - cardCenterY;
 
@@ -82,7 +81,6 @@ export default function MembersTiered() {
           const offsetY = deltaY - (i * 1.5);
           const rotZ = (i - cards.length / 2) * 2;
 
-          // Initial state: staked on the center point, showing back face
           gsap.set(card, {
             x: offsetX,
             y: offsetY,
@@ -95,16 +93,14 @@ export default function MembersTiered() {
 
         let cardIndex = 0;
         
-        // Separate ScrollTrigger for EACH tier so it triggers naturally as the user scrolls down
         TIERS.forEach((tier, tIdx) => {
           const tl = gsap.timeline({
             scrollTrigger: {
-              trigger: headingRefs.current[tIdx], // Trigger when THIS tier's heading comes up
+              trigger: headingRefs.current[tIdx],
               start: 'top 75%',
             },
           });
 
-          // Deal cards for THIS tier 
           tier.members.forEach((m, cIdx) => {
             const card = cardsRef.current[cardIndex++];
 
@@ -112,12 +108,12 @@ export default function MembersTiered() {
               x: 0,
               y: 0,
               rotateZ: 0,
-              rotateY: 0, // flip to reveal
+              rotateY: 0,
               scale: 1,
               zIndex: cardIndex + 10,
-              duration: 0.7, // Fast, smooth deal
+              duration: 0.7,
               ease: 'power3.out', 
-            }, cIdx === 0 ? 0 : '<0.15'); // Stagger within tier
+            }, cIdx === 0 ? 0 : '<0.15');
           });
         });
 
@@ -138,7 +134,6 @@ export default function MembersTiered() {
           Our Members
         </h2>
 
-        {/* Central anchor point - sticky so it stays visible as we scroll down the huge section */}
         <div ref={stackPosRef} className="sticky top-48 left-1/2 -translate-x-1/2 w-8 h-8 pointer-events-none z-50" />
 
         <div className="flex flex-col gap-32 relative z-10" style={{ marginTop: '-2rem' }}>
@@ -156,14 +151,12 @@ export default function MembersTiered() {
                 {tier.members.map((m) => {
                   const idx = counter++;
                   return (
-                    // REMOVED heavy drop shadows that cause lag, using subtle border opacity
                     <div
                       key={m.name}
                       ref={(el) => (cardsRef.current[idx] = el)}
                       className="w-[220px] h-[280px] relative shrink-0 z-10 bg-[#111] rounded-2xl shadow-sm"
                       style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
                     >
-                      {/* -- BACK FACE (CCS card design) -- */}
                       <div
                         className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center p-4 text-center cursor-default bg-[#0e110f]"
                         style={{
@@ -186,13 +179,12 @@ export default function MembersTiered() {
                         </p>
                       </div>
 
-                      {/* -- FRONT FACE (Member detail) -- */}
                       <div
                         className="absolute inset-0 rounded-2xl p-5 flex flex-col items-center text-center cursor-default bg-[#111]"
                         style={{
                           border: '1px solid rgba(255,255,255,0.07)',
                           backfaceVisibility: 'hidden',
-                          transform: 'rotateY(0deg)', // Final readable state
+                          transform: 'rotateY(0deg)',
                         }}
                       >
                         <div className="w-16 h-16 rounded-full flex items-center justify-center text-white bg-white/5 border border-white/10 mb-4">

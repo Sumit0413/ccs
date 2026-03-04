@@ -21,22 +21,19 @@ export default function AboutCCS() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Step 1: initial states for the Reveal Panel
       gsap.set(leftContentRef.current, { opacity: 0, x: 100, scale: 0.95 });
       gsap.set(listItemsRef.current, { opacity: 0, x: 30 });
       gsap.set(cardRef.current, { opacity: 0, y: 30 });
 
-      // Title lines centered initially 
       gsap.set(textLinesRef.current[0], { xPercent: -50, yPercent: -50, y: -150, scale: 1 });
       gsap.set(textLinesRef.current[1], { xPercent: -50, yPercent: -50, y: -10, scale: 1 });
-      gsap.set(textLinesRef.current[2], { xPercent: -50, yPercent: -50, y: 160, opacity: 0, scale: 0.95 }); // Subtext
+      gsap.set(textLinesRef.current[2], { xPercent: -50, yPercent: -50, y: 160, opacity: 0, scale: 0.95 });
 
-      // Build the scroll scrub timeline for pinning effect
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=200%', // User scrubs through this height
+          end: '+=200%',
           pin: true,
           scrub: 1.2,
           snap: {
@@ -47,12 +44,11 @@ export default function AboutCCS() {
         },
       });
 
-      // BIG TEXT animation: It starts center huge, then scales down and moves completely LEFT 
       const leftSideTargetX = -(window.innerWidth * 0.15);
       
       tl.to(textLinesRef.current[0], {
         x: leftSideTargetX,
-        y: -140, // Move up slightly
+        y: -140,
         scale: 0.5,
         duration: 1,
         ease: 'power3.inOut',
@@ -66,7 +62,6 @@ export default function AboutCCS() {
         ease: 'power3.inOut',
       }, 0);
 
-      // Subtext fades in under the title on the left
       tl.to(textLinesRef.current[2], {
         x: leftSideTargetX,
         y: 80,
@@ -76,16 +71,14 @@ export default function AboutCCS() {
         ease: 'power3.inOut',
       }, 0);
 
-      // Detail section slides into the RIGHT half
       tl.to(leftContentRef.current, {
         opacity: 1,
-        x: 0, // Natural position
+        x: 0,
         scale: 1,
         duration: 0.8,
         ease: 'power3.out',
       }, '>-0.4');
 
-      // List items stagger in
       tl.to(listItemsRef.current, {
         opacity: 1,
         x: 0,
@@ -94,7 +87,6 @@ export default function AboutCCS() {
         ease: 'back.out(1.2)',
       }, '>-0.2');
 
-      // The Target card slides up
       tl.to(cardRef.current, {
         opacity: 1,
         y: 0,
@@ -111,7 +103,6 @@ export default function AboutCCS() {
       <section ref={containerRef} className="relative w-full h-screen overflow-hidden" style={{ background: '#0a0a0f' }}>
         <div className="absolute inset-0 flex items-center justify-center">
 
-          {/* --- HUGE TEXT (Starts Center, moves Left) --- */}
           <div ref={textGroupRef} className="absolute left-1/2 top-1/2 pointer-events-none z-20">
             <h2 ref={(el) => (textLinesRef.current[0] = el)} className="absolute font-display font-black uppercase text-white leading-none whitespace-nowrap origin-center"
               style={{ fontSize: 'clamp(5rem, 12vw, 10rem)', textShadow: '0 0 40px rgba(168,85,247,0.2)' }}>
@@ -126,7 +117,6 @@ export default function AboutCCS() {
             </p>
           </div>
 
-          {/* --- REVEAL PANEL (Starts Hidden, slides in Right) --- */}
           <div ref={leftContentRef} className="absolute right-[5%] lg:right-[15%] top-1/2 -translate-y-1/2 w-full max-w-[500px] flex flex-col gap-10 text-left z-30 pointer-events-auto">
             
             <div className="flex-1">

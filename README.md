@@ -1,16 +1,72 @@
-# React + Vite
+# CCS Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Official website for the **Code & Compute Society (CCS)** at Arka Jain University.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React 19](https://react.dev/) + [Vite](https://vite.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [GSAP](https://gsap.com/) + [Lenis](https://lenis.darkroom.engineering/) (scroll animations)
+- [Spline](https://spline.design/) (3D hero background)
+- [Lucide React](https://lucide.dev/) (icons)
+- [OGL](https://oframe.github.io/ogl/) (WebGL light rays)
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm (comes with Node)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run development server
+
+```bash
+npm run dev
+```
+
+The site will be available at `http://localhost:5173`.
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview production build
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Navbar/
+│   ├── Hero/
+│   ├── AboutCCS/
+│   ├── AboutSOE/
+│   ├── AboutAJU/
+│   ├── Agenda/
+│   ├── Highlights/
+│   ├── MembersTiered/
+│   ├── EventsPreview/
+│   ├── GalleryPreview/
+│   ├── LoginPortalPreview/
+│   ├── Suggestions/
+│   ├── LightRays/
+│   └── Footer/
+├── hooks/
+│   └── useSmoothScroll.js
+├── pages/
+│   └── HomePage.jsx
+├── App.jsx
+└── main.jsx
+```

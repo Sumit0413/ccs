@@ -21,7 +21,6 @@ export default function AboutSOE() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Setup initial states
       gsap.set(cardsRef.current, { y: 200, opacity: 0, scale: 0.8 });
       gsap.set(title1Ref.current, { yPercent: -50, xPercent: -50, x: -240 });
       gsap.set(title2Ref.current, { yPercent: -50, xPercent: -50, x: 190 });
@@ -31,7 +30,7 @@ export default function AboutSOE() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=200%', // Scrub distance
+          end: '+=200%',
           pin: true,
           scrub: 1.5,
           snap: {
@@ -42,9 +41,8 @@ export default function AboutSOE() {
         },
       });
 
-      const topOfScreenY = -(window.innerHeight * 0.35); // Move header to top
+      const topOfScreenY = -(window.innerHeight * 0.35);
 
-      // 1. Shrink and move huge text into a horizontal top header
       tl.to(title1Ref.current, {
         y: topOfScreenY,
         x: -90,
@@ -63,16 +61,14 @@ export default function AboutSOE() {
         ease: 'power3.inOut',
       }, 0);
 
-      // Subtext moves up underneath the title and fades in
       tl.to(subtextRef.current, {
-        y: topOfScreenY + 110, // ~ -250 on 1080p
-        x: 310, // User requested final X coordinate
+        y: topOfScreenY + 110,
+        x: 310,
         opacity: 1,
         duration: 1,
         ease: 'power3.inOut'
       }, 0);
 
-      // 2. Stagger cards up from the bottom
       tl.to(cardsRef.current, {
         y: 0,
         opacity: 1,
@@ -92,7 +88,6 @@ export default function AboutSOE() {
       <section ref={containerRef} className="relative w-full h-screen overflow-hidden" style={{ background: '#0a1a08' }}>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
 
-          {/* HUGE TEXT GROUP */}
           <div ref={textGroupRef} className="absolute left-1/2 top-1/2 pointer-events-none z-20">
             <h2
               ref={title1Ref}
@@ -113,7 +108,6 @@ export default function AboutSOE() {
             </p>
           </div>
 
-          {/* BENTO CARDS - Shifted down to accommodate top text during pinning */}
           <div className="w-full max-w-[1400px] mx-auto px-8 relative z-10 flex flex-wrap justify-center gap-6 mt-40">
             {TRACKS.map((t, i) => (
               <div
