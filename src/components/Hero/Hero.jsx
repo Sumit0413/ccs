@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import LightRays from '../LightRays/LightRays';
-import SplineBot from './SplineBot';
+//import SplineBot from './SplineBot';
 
 export default function Hero() {
   const wrapperRef = useRef(null);
@@ -47,9 +48,9 @@ export default function Hero() {
     <div className="scroll-wrapper" style={{ height: '200vh', zIndex: 1 }} ref={wrapperRef}>
       <section className="panel flex flex-col justify-center relative overflow-hidden" style={{ background: '#08080a' }} ref={panelRef} id="home">
         
-        <div className="absolute inset-0 z-0 opacity-80" style={{ pointerEvents: 'auto' }}>
+       {/* <div className="absolute inset-0 z-0 opacity-80" style={{ pointerEvents: 'auto' }}>
           <SplineBot />
-        </div>
+        </div> */}
 
         <div className="absolute inset-0 z-0 opacity-80" style={{ mixBlendMode: 'screen', pointerEvents: 'none' }}>
           <LightRays
@@ -88,21 +89,21 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flexitems-center justify-center gap-4 flex-wrap flex pointer-events-auto">
-              <a href="#about"
+              <Link to="/about"
                 className="font-display font-bold text-sm uppercase tracking-widest px-8 py-4 rounded-full text-black transition-all hover:-translate-y-1"
                 style={{ background: '#39ff14', boxShadow: '0 0 20px rgba(57,255,20,0.25)' }}>
                 Explore CCS
-              </a>
+              </Link>
               <a href="#login"
                 className="font-display font-bold text-sm uppercase tracking-widest px-8 py-4 rounded-full text-white transition-all hover:-translate-y-1"
                 style={{ border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.02)' }}>
                 Login Portal
               </a>
-              <a href="#events"
+              <Link to="/events"
                 className="font-display font-bold text-sm uppercase tracking-widest px-8 py-4 rounded-full text-white transition-all hover:-translate-y-1"
                 style={{ border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.02)' }}>
                 View Events
-              </a>
+              </Link>
             </div>
           </div>
         </div>
